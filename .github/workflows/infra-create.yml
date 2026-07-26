@@ -37,7 +37,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -input=false -out=tfplan
+        run: terraform plan -input=false -var-file=bytebrain.tfvars -out=tfplan
 
       - name: Upload Plan Artifacts
         uses: actions/upload-artifact@v4
@@ -49,4 +49,4 @@ jobs:
           retention-days: 30
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan -var-file=bytebrain.tfvars
+        run: terraform apply -auto-approve tfplan
