@@ -4,4 +4,4 @@ dist
 tsconfig.tsbuildinfo
 .terraform*
 *Zone.Identifier
-*tfvars
+terraform.tfvars
