@@ -1,5 +1,5 @@
 output "resource_group_id" {
-  description = "Resource ID of the Bytebrain resource group"
+  description = "Resource group ID of the Bytebrain resource group"
   value       = module.bytebrain_rg.id
 }
 
