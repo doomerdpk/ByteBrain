@@ -1,0 +1,65 @@
+name: Pipeline to destroy infra for ByteBrain Application
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type the exact resource group name to confirm destroy (e.g. rg-bytebrain-prod-centralindia)"
+        required: true
+        type: string
+      reason:
+        description: "Why are you destroying this resource-group?"
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  ARM_USE_OIDC: true
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+jobs:
+  validate-confirmation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check resource group name
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "rg-bytebrain-prod-centralindia" ]; then
+            echo "Resource group name does not match. Aborting destroy."
+            exit 1
+          fi
+          echo "✅ Resource group name matched. Reason logged: ${{ github.event.inputs.reason }}"
+
+  destroy:
+    needs: validate-confirmation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ">= 1.9.0"
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plans
+        run: terraform plan -destroy -input=false -var-file=bytebrain.tfvars -out=destroy-plan
+
+      - name: Upload Destroy Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: destroy-plan-${{ github.run_number }}
+          path: infra/destroy-plan
+          retention-days: 30
+
+      - name: Terraform Destroy
+        run: terraform apply -auto-approve destroy-plan
