@@ -38,7 +38,7 @@ resource "azurerm_container_registry" "this" {
 
   tags = var.tags
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
