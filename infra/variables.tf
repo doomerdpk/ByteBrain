@@ -14,3 +14,9 @@ variable "location" {
   type        = string
   default     = "West India"
 }
+
+variable "acr_name" {
+  description = "Globally unique ACR name (letters/numbers only, no hyphens, 5-50 chars)"
+  type        = string
+  default     = "acrbytebraindev01"
+}

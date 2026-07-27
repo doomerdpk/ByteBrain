@@ -12,3 +12,13 @@ module "bytebrain_rg" {
   location = var.location
   tags     = local.bytebrain_tags
 }
+
+module "bytebrain_acr" {
+  source = "./modules/acr"
+
+  name                = var.acr_name
+  resource_group_name = module.bytebrain_rg.name
+  location            = var.location
+  sku                 = "Standard"
+  tags                = local.bytebrain_tags
+}
