@@ -23,13 +23,7 @@ resource "azurerm_container_registry" "this" {
     }
   }
 
-  dynamic "retention_policy" {
-    for_each = var.sku == "Premium" ? [1] : []
-    content {
-      days    = var.untagged_retention_days
-      enabled = true
-    }
-  }
+  retention_policy_in_days = var.sku == "Premium" ? var.untagged_retention_days : null
 
   dynamic "georeplications" {
     for_each = var.sku == "Premium" ? var.georeplication_locations : []
