@@ -51,7 +51,7 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Plans
+      - name: Terraform Plan
         run: terraform plan -destroy -input=false -var-file=bytebrain.tfvars -out=destroy-plan
 
       - name: Upload Destroy Plan
