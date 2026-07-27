@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc -b && echo 'Build completed successfully!!'",
+    "build": "npx tsc -b && echo 'Build completed successfully!'",
     "dev": "npx tsc -b && nodemon dist/index.js",
     "start": "node dist/index.js",
     "start:pm2": "npx tsc -b && pm2 start dist/index.js --name bytebrain-backend",
