@@ -10,7 +10,7 @@ FROM node:20.19-slim
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN groupadd --system appgroup && useradd --system --gid appgroup --no-create-home appuser
 COPY --from=build --chown=appuser:appgroup /app/dist ./dist
 USER appuser
 EXPOSE 3000
