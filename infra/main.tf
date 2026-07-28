@@ -31,8 +31,15 @@ module "bytebrain_frontend" {
   storage_account_name     = "bytebrainfrontenddev01"
   account_replication_type = "LRS"
 
-  tags = {
-    environment = "production"
-    project     = "react-frontend"
-  }
+  tags = local.bytebrain_tags
+}
+
+module "bytebrain_front_door" {
+  source = "./modules/front-door"
+
+  resource_group_name = module.bytebrain_rg.name
+  fd_name             = "bytebrain-frontdoor"
+  front_door_sku      = "Standard_AzureFrontDoor"
+
+  tags = local.bytebrain_tags
 }
