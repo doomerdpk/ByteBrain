@@ -44,3 +44,14 @@ module "bytebrain_acr" {
 
 #   tags = local.bytebrain_tags
 # }
+
+module "bytebrain_frontend" {
+
+  source = "../../modules/static-web-app"
+
+  name                = "bytebrain-dev-fe"
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+
+  tags = local.bytebrain_tags
+}
