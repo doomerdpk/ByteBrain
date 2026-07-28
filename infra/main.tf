@@ -47,7 +47,7 @@ module "bytebrain_acr" {
 
 module "bytebrain_frontend" {
 
-  source = "../../modules/static-web-app"
+  source = "./modules/static-web-app"
 
   name                = "bytebrain-dev-fe"
   resource_group_name = module.bytebrain_rg.name
