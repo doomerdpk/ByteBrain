@@ -39,6 +39,7 @@ module "bytebrain_front_door" {
 
   resource_group_name = module.bytebrain_rg.name
   fd_name             = "bytebrain-frontdoor"
+  origin_host_name      = module.bytebrain_frontend.static_website_endpoint
   front_door_sku      = "Standard_AzureFrontDoor"
 
   tags = local.bytebrain_tags

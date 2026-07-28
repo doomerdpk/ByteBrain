@@ -8,6 +8,10 @@ variable "fd_name" {
   description = "Front Door name"
 }
 
+variable "origin_host_name" {
+  description = "The hostname of the Storage Account static website endpoint."
+  type        = string
+}
 
 variable "front_door_sku" {
   type    = string

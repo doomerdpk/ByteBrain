@@ -1,7 +1,6 @@
 locals {
   fd_name          = var.fd_name
   fd_endpoint_name = "${var.fd_name}-fd"
-  origin_host_name = azurerm_storage_account.static.primary_web_host
 }
 
 # Premium/Standard Profile used to attach endpoints, origin groups, origins, routes, rules, and WAF policies.
@@ -50,8 +49,8 @@ resource "azurerm_cdn_frontdoor_origin" "static_site" {
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.static_site.id
 
   enabled                         = true
-  host_name                       = local.origin_host_name
-  origin_host_header              = local.origin_host_name
+  host_name                       = var.origin_host_name
+  origin_host_header              = var.origin_host_name
   http_port                       = 80
   https_port                      = 443
   priority                        = 1
