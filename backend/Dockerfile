@@ -1,4 +1,4 @@
-FROM FROM node:20.19-slim AS build
+FROM node:20.19-slim AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -6,7 +6,7 @@ COPY tsconfig.json ./
 COPY ./src ./src
 RUN npm run build
 
-FROM FROM node:20.19-slim
+FROM node:20.19-slim
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
