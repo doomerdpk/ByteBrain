@@ -1,4 +1,4 @@
-FROM node:20.19-slim AS build
+FROM node:22.22-slim AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -6,13 +6,13 @@ COPY tsconfig.json ./
 COPY ./src ./src
 RUN npm run build
 
-FROM node:20.19-slim
+FROM node:22.22-slim
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
-RUN npm install -g npm@latest
+RUN npm install -g npm@12.0.1
 COPY package*.json ./
 RUN npm ci --omit=dev
 RUN groupadd --system appgroup && useradd --system --gid appgroup --no-create-home appuser
