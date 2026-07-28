@@ -1,0 +1,7 @@
+# --- npm's own bundled dependencies (node_modules/npm/node_modules/...) ---
+# Not reachable by application runtime code — npm's internal build/install tooling only.
+# No newer npm CLI release exists yet that bumps these bundled versions.
+# Re-check: https://github.com/npm/cli/releases — remove these lines once a release fixes them.
+
+CVE-2026-14257
+GHSA-r292-9mhp-454m
