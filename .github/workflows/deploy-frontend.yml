@@ -77,6 +77,6 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
 
           action: "upload"
-          app_location: "bytebrain-dev-fe"
+          app_location: "frontend"
           output_location: "dist"
           skip_app_build: false
