@@ -38,7 +38,7 @@ jobs:
             frontend:
               - 'frontend/**'
 
-  build:
+  buildAndPush:
     needs: detect-changes
     if: needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
@@ -69,7 +69,7 @@ jobs:
       - name: Login to ACR
         if: matrix.enabled == 'true'
         run: |
-          az acr login --name ${{ secrets.ACR_NAME }}
+          az acr login --name ${{ vars.ACR_NAME }}
 
       - name: Set up Docker Buildx
         if: matrix.enabled == 'true'
