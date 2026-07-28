@@ -22,3 +22,17 @@ module "bytebrain_acr" {
   sku                 = "Standard"
   tags                = local.bytebrain_tags
 }
+
+module "bytebrain_frontend" {
+  source = "./modules/storage-static-site"
+
+  resource_group_name      = module.bytebrain_rg.name
+  location                 = module.bytebrain_rg.location
+  storage_account_name     = "bytebrainfrontenddev01"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = "production"
+    project     = "react-frontend"
+  }
+}
