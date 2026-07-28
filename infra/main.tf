@@ -34,13 +34,13 @@ module "bytebrain_frontend" {
   tags = local.bytebrain_tags
 }
 
-module "bytebrain_front_door" {
-  source = "./modules/front-door"
+# module "bytebrain_front_door" {
+#   source = "./modules/front-door"
 
-  resource_group_name = module.bytebrain_rg.name
-  fd_name             = "bytebrain-frontdoor"
-  origin_host_name      = module.bytebrain_frontend.primary_web_host
-  front_door_sku      = "Standard_AzureFrontDoor"
+#   resource_group_name = module.bytebrain_rg.name
+#   fd_name             = "bytebrain-frontdoor"
+#   origin_host_name      = module.bytebrain_frontend.primary_web_host
+#   front_door_sku      = "Standard_AzureFrontDoor"
 
-  tags = local.bytebrain_tags
-}
+#   tags = local.bytebrain_tags
+# }
