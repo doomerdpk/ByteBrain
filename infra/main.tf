@@ -51,7 +51,8 @@ module "bytebrain_frontend" {
 
   name                = "bytebrain-dev-fe"
   resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
+  # Static-web-apps are not available in all regions, so we will use East Asia for now.
+  location            = "East Asia"
 
   tags = local.bytebrain_tags
 }
