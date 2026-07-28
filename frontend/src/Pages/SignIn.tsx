@@ -19,7 +19,7 @@ export default function Login() {
   const onSubmit = (data: LoginFormData) => {
     mutate(data, {
       onSuccess: (response: LoginResponse) => {
-        toast.success("Signin successful!");
+        toast.success("Signin successful!!");
         localStorage.setItem("token", response.token);
         navigate("/dashboard");
       },

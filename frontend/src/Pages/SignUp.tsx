@@ -25,7 +25,7 @@ export default function Signup() {
   const onSubmit = (data: FormData) => {
     mutate(data, {
       onSuccess: () => {
-        toast.success("Signup successful!");
+        toast.success("Signup successful!!");
         navigate("/login");
       },
       onError: (error: any) => {
