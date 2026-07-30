@@ -72,7 +72,7 @@ module "bytebrain_vnet" {
 }
 
 module "azure_bastion" {
-  source = "./modules/azure-bastion-module"
+  source = "./modules/azure-bastion"
 
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
