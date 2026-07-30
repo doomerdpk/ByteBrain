@@ -151,7 +151,7 @@ resource "azurerm_bastion_host" "this" {
 
   scale_units = local.advanced_features_supported ? var.scale_units : null
 
-  tunneling                  = local.advanced_features_supported ? var.enable_tunneling : false
+  tunneling_enabled          = local.advanced_features_supported ? var.enable_tunneling : false
   ip_connect_enabled         = local.advanced_features_supported ? var.enable_ip_connect : false
   shareable_link_enabled     = local.advanced_features_supported ? var.enable_shareable_link : false
   kerberos_enabled           = local.advanced_features_supported ? var.enable_kerberos : false

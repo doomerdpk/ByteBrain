@@ -1,7 +1,7 @@
 locals {
   bytebrain_tags = {
-    Project     = "Bytebrain"
-    ManagedBy   = "Terraform"
+    Project   = "Bytebrain"
+    ManagedBy = "Terraform"
   }
 }
 
@@ -52,7 +52,7 @@ module "bytebrain_frontend" {
   name                = "bytebrain-dev-fe"
   resource_group_name = module.bytebrain_rg.name
   # Static-web-apps are not available in all regions, so we will use East Asia for now.
-  location            = "East Asia"
+  location = "East Asia"
 
   tags = local.bytebrain_tags
 }
@@ -61,8 +61,8 @@ module "bytebrain_vnet" {
   source = "./modules/vnet"
 
   name                = "vnet-bytebrain-dev-centralindia"
-  resource_group_name      = module.bytebrain_rg.name
-  location                 = module.bytebrain_rg.location
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
 
   address_space = [
     "10.0.0.0/16"
@@ -84,8 +84,8 @@ module "azure_bastion" {
   bastion_subnet_address_prefix = "10.0.1.0/26"
   bastion_host_name             = "bastion-dev-01"
 
-  sku                       = "Basic"
-  enable_diagnostics         = false
+  sku                = "Basic"
+  enable_diagnostics = false
 
   allowed_source_address_prefixes = ["203.0.113.0/24"]
   target_vnet_address_space       = module.bytebrain_vnet.address_space
