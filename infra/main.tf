@@ -88,5 +88,4 @@ module "azure_bastion" {
   enable_diagnostics = false
 
   allowed_source_address_prefixes = ["203.0.113.0/24"]
-  target_vnet_address_space       = module.bytebrain_vnet.address_space
 }

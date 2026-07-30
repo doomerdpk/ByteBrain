@@ -84,7 +84,7 @@ resource "azurerm_network_security_group" "bastion" {
     source_port_range             = "*"
     destination_port_ranges       = ["22", "3389"]
     source_address_prefix         = "*"
-    destination_address_prefixes  = var.target_vnet_address_space
+    destination_address_prefix  = "VirtualNetwork"
   }
 
 # Bastion, being a managed PaaS service, needs to talk back to Azure's own backend infrastructure

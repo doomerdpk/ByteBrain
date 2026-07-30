@@ -104,8 +104,3 @@ variable "allowed_source_address_prefixes" {
   type        = list(string)
   default     = ["Internet"]
 }
-
-variable "target_vnet_address_space" {
-  description = "Address space of the VNet (used to scope NSG outbound rules to RDP/SSH targets)"
-  type        = list(string)
-}
