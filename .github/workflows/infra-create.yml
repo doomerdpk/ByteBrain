@@ -28,7 +28,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: ">= 1.9.0"
+          terraform_version: "1.13.2"
 
       - name: Terraform Init
         run: terraform init
@@ -38,6 +38,9 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -input=false -var-file=bytebrain.tfvars -out=tfplan
+
+      - name: Export Plan
+        run: terraform show -no-color tfplan > tfplan.txt
 
       - name: Upload Plan Artifacts
         uses: actions/upload-artifact@v4
