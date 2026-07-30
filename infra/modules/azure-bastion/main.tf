@@ -142,6 +142,11 @@ resource "azurerm_public_ip" "bastion" {
   tags                = var.tags
 }
 
+resource "time_sleep" "wait_for_nsg" {
+  depends_on      = [azurerm_subnet_network_security_group_association.bastion]
+  create_duration = "60s"
+}
+
 resource "azurerm_bastion_host" "this" {
   name                = var.bastion_host_name
   location            = var.location
