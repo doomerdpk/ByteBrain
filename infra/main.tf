@@ -56,3 +56,17 @@ module "bytebrain_frontend" {
 
   tags = local.bytebrain_tags
 }
+
+module "vnet" {
+  source = "./modules/vnet"
+
+  name                = "vnet-bytebrain-dev-centralindia"
+  resource_group_name      = module.bytebrain_rg.name
+  location                 = module.bytebrain_rg.location
+
+  address_space = [
+    "10.0.0.0/16"
+  ]
+
+  tags = local.bytebrain_tags
+}
