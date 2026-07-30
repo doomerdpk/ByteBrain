@@ -57,7 +57,7 @@ module "bytebrain_frontend" {
   tags = local.bytebrain_tags
 }
 
-module "vnet" {
+module "bytebrain_vnet" {
   source = "./modules/vnet"
 
   name                = "vnet-bytebrain-dev-centralindia"
@@ -69,4 +69,24 @@ module "vnet" {
   ]
 
   tags = local.bytebrain_tags
+}
+
+module "azure_bastion" {
+  source = "./modules/azure-bastion-module"
+
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+  tags                = local.bytebrain_tags
+
+  vnet_id   = module.bytebrain_vnet.id
+  vnet_name = module.bytebrain_vnet.name
+
+  bastion_subnet_address_prefix = "10.0.1.0/26"
+  bastion_host_name             = "bastion-dev-01"
+
+  sku                       = "Basic"
+  enable_diagnostics         = false
+
+  allowed_source_address_prefixes = ["203.0.113.0/24"]
+  target_vnet_address_space       = module.bytebrain_vnet.address_space
 }
