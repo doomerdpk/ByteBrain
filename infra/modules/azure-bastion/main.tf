@@ -179,7 +179,7 @@ resource "azurerm_monitor_diagnostic_setting" "bastion" {
     category = "BastionAuditLogs"
   }
 
-  metric {
-    category = "AllMetrics"
-  }
+  enabled_metric {
+  category = "AllMetrics"
+ }
 }
