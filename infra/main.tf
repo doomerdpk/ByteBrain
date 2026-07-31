@@ -89,3 +89,12 @@ module "azure_bastion" {
 
   allowed_source_address_prefixes = ["203.0.113.0/24"]
 }
+
+module "bytebrain_subnet" {
+  source              = "./modules/subnet"
+  resource_group_name = module.bytebrain_rg.name
+  vnet_name           = module.bytebrain_vnet.name
+  subnet_name         = "bytebrain-app"
+  address_prefixes    = ["10.0.1.0/24"]
+  tags                = local.bytebrain_tags
+}
