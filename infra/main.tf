@@ -62,7 +62,7 @@ module "bytebrain_vnet" {
 
   name                = "vnet-bytebrain-dev-centralindia"
   resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
+  location            = "southindia"
 
   address_space = [
     "10.0.0.0/16"
@@ -75,7 +75,7 @@ module "azure_bastion" {
   source = "./modules/azure-bastion"
 
   resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
+  location            = "southindia"
   tags                = local.bytebrain_tags
 
   vnet_id   = module.bytebrain_vnet.id
@@ -102,7 +102,7 @@ module "bytebrain_subnet" {
 module "nat_gateway" {
   source              = "./modules/nat-gateway"
   resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
+  location            = "southindia"
   nat_gateway_name    = "natgw-bytebrain"
   public_ip_name      = "pip-natgw-bytebrain"
   subnet_id           = module.bytebrain_subnet.subnet_id
@@ -134,7 +134,7 @@ data "azurerm_key_vault_secret" "ssh_public_key" {
 module "bytebrain_app_vm" {
   source                = "./modules/app-vm"
   resource_group_name   = module.bytebrain_rg.name
-  location              = module.bytebrain_rg.location
+  location              = "southindia"
   vm_name               = "bytebrain-app-01"
   subnet_id             = module.bytebrain_subnet.subnet_id
   bastion_subnet_prefix = "10.0.1.0/26"
