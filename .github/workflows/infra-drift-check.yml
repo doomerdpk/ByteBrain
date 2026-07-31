@@ -40,18 +40,9 @@ jobs:
           terraform plan -input=false -var-file=bytebrain.tfvars -detailed-exitcode -out=tfplan
         continue-on-error: true
 
-      - name: Fail job if drift detected
+      - name: Show plan on drift
         if: steps.plan.outputs.exitcode == '2'
-        run: |
-          echo "Drift detected — infrastructure differs from Terraform state."
-          terraform show -no-color tfplan
-          exit 1
-
-      - name: Fail job if plan errored
-        if: steps.plan.outputs.exitcode == '1'
-        run: |
-          echo "Terraform plan failed."
-          exit 1
+        run: terraform show -no-color tfplan
 
       - name: Open issue on drift
         if: steps.plan.outputs.exitcode == '2'
@@ -65,3 +56,15 @@ jobs:
               body: `Drift was detected in a scheduled Terraform plan. Check the [workflow run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for details.`,
               labels: ["terraform-drift"]
             })
+
+      - name: Fail job if drift detected
+        if: steps.plan.outputs.exitcode == '2'
+        run: |
+          echo "Drift detected — infrastructure differs from Terraform state."
+          exit 1
+
+      - name: Fail job if plan errored
+        if: steps.plan.outputs.exitcode == '1'
+        run: |
+          echo "Terraform plan failed."
+          exit 1
