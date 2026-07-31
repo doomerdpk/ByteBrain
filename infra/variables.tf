@@ -20,3 +20,9 @@ variable "acr_name" {
   type        = string
   default     = "acrbytebraindev01"
 }
+
+variable "ssh_public_key" {
+  type        = string
+  description = "SSH public key for VM admin access"
+  sensitive   = true
+}
