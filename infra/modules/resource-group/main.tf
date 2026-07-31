@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "this" {
   location = var.location
   tags     = var.tags
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
