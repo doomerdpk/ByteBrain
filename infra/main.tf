@@ -98,3 +98,13 @@ module "bytebrain_subnet" {
   address_prefixes    = ["10.0.1.64/26"]
   tags                = local.bytebrain_tags
 }
+
+module "nat_gateway" {
+  source              = "./modules/nat-gateway"
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+  nat_gateway_name    = "natgw-bytebrain"
+  public_ip_name      = "pip-natgw-bytebrain"
+  subnet_id           = module.bytebrain_subnet.subnet_id
+  tags                = local.bytebrain_tags
+}
