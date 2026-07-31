@@ -138,6 +138,7 @@ module "bytebrain_app_vm" {
   vm_name               = "bytebrain-app-01"
   subnet_id             = module.bytebrain_subnet.subnet_id
   bastion_subnet_prefix = "10.0.1.0/26"
+  vm_size               = "Standard_D2s_v3"
   admin_username        = var.admin_username
   ssh_public_key        = data.azurerm_key_vault_secret.ssh_public_key.value
   tags                  = local.bytebrain_tags
