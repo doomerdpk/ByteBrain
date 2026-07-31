@@ -87,7 +87,7 @@ module "azure_bastion" {
   sku                = "Basic"
   enable_diagnostics = false
 
-  allowed_source_address_prefixes = ["203.0.113.0/24"]
+  allowed_source_address_prefixes = ["103.175.135.241/32"]
 }
 
 module "bytebrain_subnet" {
