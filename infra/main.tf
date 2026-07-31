@@ -95,6 +95,6 @@ module "bytebrain_subnet" {
   resource_group_name = module.bytebrain_rg.name
   vnet_name           = module.bytebrain_vnet.name
   subnet_name         = "bytebrain-app"
-  address_prefixes    = ["10.0.1.0/24"]
+  address_prefixes    = ["10.0.1.64/26"]
   tags                = local.bytebrain_tags
 }
