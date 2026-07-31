@@ -108,3 +108,30 @@ module "nat_gateway" {
   subnet_id           = module.bytebrain_subnet.subnet_id
   tags                = local.bytebrain_tags
 }
+
+# module "bytebrain_app_vm" {
+#   source                = "./modules/app-vm"
+#   resource_group_name   = module.bytebrain_rg.name
+#   location              = module.bytebrain_rg.location
+#   vm_name               = "bytebrain-app-01"
+#   subnet_id             = module.bytebrain_subnet.subnet_id
+#   bastion_subnet_prefix = "10.0.1.0/26"
+#   admin_username        = var.admin_username
+#   ssh_public_key        = var.ssh_public_key
+#   tags                  = var.tags
+# }
+
+module "key_vault" {
+  source              = "./modules/key-vault"
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+  key_vault_name      = "kv-app-dev-01"
+  tags                = local.bytebrain_tags
+}
+
+module "bytebrain_ssh_key_secret" {
+  source       = "./modules/key-vault-secret"
+  key_vault_id = module.key_vault.key_vault_id
+  secret_name  = "bytebrain-ssh-public-key"
+  secret_value = var.ssh_public_key
+}
