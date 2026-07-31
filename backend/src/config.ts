@@ -7,11 +7,11 @@ export const saltRounds = 10;
 export const PORT = 3000;
 
 if (!JWT_SECRET) {
-  throw new Error("Error fetching JWT_SECRET from environment variables");
+  throw new Error("Error fetching JWT_SECRET from environment variables!");
 }
 
 if (!DATABASE_URL) {
-  throw new Error("Error fetching DATABASE URL from environment variables");
+  throw new Error("Error fetching DATABASE URL from environment variables!");
 }
 
 export const DATABASE_URL_STR: string = DATABASE_URL;
