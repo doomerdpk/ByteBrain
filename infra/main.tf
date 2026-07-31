@@ -125,7 +125,7 @@ module "key_vault" {
   source              = "./modules/key-vault"
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
-  key_vault_name      = "kv-app-dev-01"
+  key_vault_name      = "kv-dpk-dev-01"
   tags                = local.bytebrain_tags
 }
 
