@@ -26,3 +26,8 @@ variable "ssh_public_key" {
   description = "SSH public key for VM admin access"
   sensitive   = true
 }
+
+variable "admin_username" {
+  type        = string
+  description = "Admin username for VM SSH access"
+}

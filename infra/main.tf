@@ -124,6 +124,13 @@ module "bytebrain_ssh_key_secret" {
   secret_value = var.ssh_public_key
 }
 
+data "azurerm_key_vault_secret" "ssh_public_key" {
+  name         = "bytebrain-ssh-public-key"
+  key_vault_id = module.bytebrain_key_vault.key_vault_id
+  depends_on   = [module.bytebrain_ssh_key_secret]
+}
+
+
 module "bytebrain_app_vm" {
   source                = "./modules/app-vm"
   resource_group_name   = module.bytebrain_rg.name
@@ -132,6 +139,6 @@ module "bytebrain_app_vm" {
   subnet_id             = module.bytebrain_subnet.subnet_id
   bastion_subnet_prefix = "10.0.1.0/26"
   admin_username        = var.admin_username
-  ssh_public_key        = module.bytebrain_ssh_key_secret.secret_value
-  tags                  = var.tags
+  ssh_public_key        = data.azurerm_key_vault_secret.ssh_public_key.value
+  tags                  = local.bytebrain_tags
 }
