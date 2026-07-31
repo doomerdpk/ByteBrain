@@ -126,7 +126,7 @@ module "bytebrain_ssh_key_secret" {
 
 data "azurerm_key_vault_secret" "ssh_public_key" {
   name         = "bytebrain-ssh-public-key"
-  key_vault_id = module.bytebrain_key_vault.key_vault_id
+  key_vault_id = module.key_vault.key_vault_id
   depends_on   = [module.bytebrain_ssh_key_secret]
 }
 
