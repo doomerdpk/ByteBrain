@@ -12,9 +12,3 @@ resource "azurerm_key_vault" "this" {
   soft_delete_retention_days    = 90
   rbac_authorization_enabled     = true    
 }
-
-resource "azurerm_role_assignment" "kv_admin" {
-  scope                = azurerm_key_vault.this.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
