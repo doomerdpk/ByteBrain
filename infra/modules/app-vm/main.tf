@@ -34,7 +34,6 @@ resource "azurerm_network_interface" "this" {
   resource_group_name             = var.resource_group_name
   location                        = var.location
   tags                            = var.tags
-  accelerated_networking_enabled  = var.enable_accelerated_networking
 
   ip_configuration {
     name                          = "internal"
