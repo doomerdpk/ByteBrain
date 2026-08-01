@@ -47,11 +47,6 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "$VM_HOST" >> ~/.ssh/known_hosts
 
-      - name: Debug SSH connection
-        run: |
-          ssh -v -i ~/.ssh/deploy_key "$VM_USER@$VM_HOST" "echo SSH_CONNECTION_SUCCESS"
-        continue-on-error: true
-
       - name: Deploy to VM
         run: |
           chmod +x scripts/deploy.sh

@@ -1,5 +1,6 @@
 #!/bin/bash
-set -euo pipefail
+# set -euo pipefail
+set -x
 
 VM_HOST="$1"
 VM_USER="$2"
