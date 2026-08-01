@@ -2,6 +2,7 @@ import express from 'express';
 import type { Express } from 'express';
 import mongoose from "mongoose";
 import { userRouter } from "./routes/routes.js";
+import healthRouter from "./routes/health.js";
 import http from "http";
 import { DATABASE_URL_STR, PORT } from "./config.js";
 import cors from "cors";
@@ -11,7 +12,9 @@ const port = Number(PORT) || 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use("/api/v1", healthRouter);
 app.use("/api/v1", userRouter);
+
 
 async function startApplication() {
   try {
