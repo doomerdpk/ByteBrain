@@ -150,3 +150,14 @@ module "bytebrain_app_vm" {
   ssh_public_key        = data.azurerm_key_vault_secret.ssh_public_key.value
   tags                  = local.bytebrain_tags
 }
+
+module "bytebrain_lb" {
+  source                     = "./modules/load-balancer"
+  resource_group_name        = module.bytebrain_rg.name
+  location                   = module.bytebrain_rg.location
+  lb_name                    = "lb-bytebrain-app"
+  public_ip_name             = "pip-lb-bytebrain"
+  backend_nic_id             = module.bytebrain_app_vm.nic_id
+  backend_nic_ip_config_name = "internal"
+  tags                       = local.bytebrain_tags
+}

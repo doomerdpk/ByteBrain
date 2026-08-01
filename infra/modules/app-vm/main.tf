@@ -17,6 +17,18 @@ resource "azurerm_network_security_group" "this" {
   }
 
   security_rule {
+  name                       = "Allow-HTTP-From-LB"
+  priority                   = 110
+  direction                  = "Inbound"
+  access                     = "Allow"
+  protocol                   = "Tcp"
+  source_port_range          = "*"
+  destination_port_range     = "80"
+  source_address_prefix      = "AzureLoadBalancer"
+  destination_address_prefix = "*"
+  }
+
+  security_rule {
     name                       = "Deny-All-Inbound-Internet"
     priority                   = 4096
     direction                  = "Inbound"
