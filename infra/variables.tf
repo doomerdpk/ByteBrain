@@ -31,3 +31,9 @@ variable "admin_username" {
   type        = string
   description = "Admin username for VM SSH access"
 }
+
+variable "db_connection_string" {
+  type        = string
+  description = "Database connection string for the backend"
+  sensitive   = true
+}
