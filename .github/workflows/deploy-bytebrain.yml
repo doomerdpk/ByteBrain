@@ -1,0 +1,55 @@
+name: Deploy ByteBrain App
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "frontend/**"
+      - "backend/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      VM_HOST: ${{ secrets.VM_PRIVATE_IP }}
+      VM_USER: ${{ secrets.VM_ADMIN_USERNAME }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: Build backend
+        run: |
+          cd backend
+          npm ci --include=dev
+          npm run build
+          npm ci --omit=dev
+
+      - name: Setup SSH key for deploy
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$VM_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy to VM
+        run: |
+          chmod +x scripts/deploy.sh
+          ./scripts/deploy.sh "$VM_HOST" "$VM_USER"
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key"
