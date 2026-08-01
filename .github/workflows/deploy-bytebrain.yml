@@ -47,6 +47,14 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "$VM_HOST" >> ~/.ssh/known_hosts
 
+      - name: Debug SSH setup
+        run: |
+          echo "HOME is: $HOME"
+          whoami
+          ls -la ~/.ssh/
+          cat ~/.ssh/known_hosts 2>/dev/null || echo "known_hosts missing"
+          echo "VM_HOST is: [$VM_HOST]"
+
       - name: Deploy to VM
         run: |
           chmod +x scripts/deploy.sh

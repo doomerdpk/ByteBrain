@@ -6,4 +6,4 @@ location            = "South India"
 acr_name = "acrbytebraindev01"
 
 # Bytebrain VM Configuration
-admin_username = "bytebrainadmin"
+admin_username = "  "
