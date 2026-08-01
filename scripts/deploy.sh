@@ -32,6 +32,8 @@ ssh $SSH_OPTS "$VM_USER@$VM_HOST" "ln -sfn $RELEASE_DIR /opt/bytebrain/current"
 
 ssh $SSH_OPTS "$VM_USER@$VM_HOST" "cd /opt/bytebrain/current/backend && pm2 startOrReload ecosystem.config.js"
 
+rsync -avz -e "ssh $SSH_OPTS" ./nginx.conf "$VM_USER@$VM_HOST:/tmp/nginx.conf"
+ssh $SSH_OPTS "$VM_USER@$VM_HOST" "sudo cp /tmp/nginx.conf /etc/nginx/nginx.conf && sudo nginx -t"
 ssh $SSH_OPTS "$VM_USER@$VM_HOST" "sudo systemctl reload nginx"
 
 sleep 3
