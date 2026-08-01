@@ -24,7 +24,7 @@ resource "azurerm_network_security_group" "this" {
   protocol                   = "Tcp"
   source_port_range          = "*"
   destination_port_range     = "80"
-  source_address_prefix      = "AzureLoadBalancer"
+  source_address_prefix      = "Internet"
   destination_address_prefix = "*"
   }
 
