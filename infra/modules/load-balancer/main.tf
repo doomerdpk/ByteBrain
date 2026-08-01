@@ -51,5 +51,5 @@ resource "azurerm_lb_rule" "http" {
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.this.id]
   probe_id                       = azurerm_lb_probe.http.id
   idle_timeout_in_minutes        = 4
-  enable_tcp_reset                = true
+  tcp_reset_enabled                = true
 }
