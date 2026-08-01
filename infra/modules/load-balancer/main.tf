@@ -4,7 +4,6 @@ resource "azurerm_public_ip" "lb" {
   location            = var.location
   allocation_method   = "Static"
   sku                 = "Standard"
-  zones               = ["1", "2", "3"] 
   tags                = var.tags
 }
 
