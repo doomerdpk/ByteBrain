@@ -124,6 +124,13 @@ module "bytebrain_ssh_key_secret" {
   secret_value = var.ssh_public_key
 }
 
+module "bytebrain_db_connection_string" {
+  source       = "./modules/key-vault-secret"
+  key_vault_id = module.key_vault.key_vault_id
+  secret_name  = "bytebrain-db-connection-string"
+  secret_value = var.db_connection_string
+}
+
 data "azurerm_key_vault_secret" "ssh_public_key" {
   name         = "bytebrain-ssh-public-key"
   key_vault_id = module.key_vault.key_vault_id
