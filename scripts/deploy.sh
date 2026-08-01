@@ -14,8 +14,10 @@ echo "Deploying release $RELEASE_TS to $VM_HOST"
 ssh $SSH_OPTS "$VM_USER@$VM_HOST" "mkdir -p $RELEASE_DIR/frontend $RELEASE_DIR/backend"
 
 rsync -avz --delete -e "ssh $SSH_OPTS" ./frontend/dist/ "$VM_USER@$VM_HOST:$RELEASE_DIR/frontend/dist/"
-rsync -avz --delete -e "ssh $SSH_OPTS" ./backend/dist/ ./backend/node_modules/ ./backend/ecosystem.config.js \
-  "$VM_USER@$VM_HOST:$RELEASE_DIR/backend/"
+
+rsync -avz --delete -e "ssh $SSH_OPTS" ./backend/dist "$VM_USER@$VM_HOST:$RELEASE_DIR/backend/"
+rsync -avz --delete -e "ssh $SSH_OPTS" ./backend/node_modules "$VM_USER@$VM_HOST:$RELEASE_DIR/backend/"
+rsync -avz --delete -e "ssh $SSH_OPTS" ./backend/ecosystem.config.js "$VM_USER@$VM_HOST:$RELEASE_DIR/backend/"
 
 ssh $SSH_OPTS "$VM_USER@$VM_HOST" "cat > $RELEASE_DIR/backend/.env" <<EOF
 DATABASE_URL=${DATABASE_URL}
