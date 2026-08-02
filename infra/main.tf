@@ -201,7 +201,7 @@ module "bytebrain_vmss" {
   vmss_name               = "vmss-bytebrain-app"
   subnet_id               = module.bytebrain_subnet.subnet_id
   gallery_image_id        = data.azurerm_shared_image_version.bytebrain_app.id
-  vm_size                  = "Standard_B1ms"
+  vm_size                  = "Standard_B1ls"
   instance_count            = 1
   admin_username            = var.admin_username
   ssh_public_key            = data.azurerm_key_vault_secret.ssh_public_key.value
