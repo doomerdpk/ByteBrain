@@ -211,9 +211,3 @@ module "bytebrain_vmss" {
   key_vault_name            = module.key_vault.key_vault_name
   tags                      = local.bytebrain_tags
 }
-
-resource "azurerm_role_assignment" "vmss_keyvault_access" {
-  scope                = module.key_vault.key_vault_id
-  role_definition_name = "Key Vault Secrets User"
-  principal_id         = module.bytebrain_vmss.vmss_principal_id
-}
