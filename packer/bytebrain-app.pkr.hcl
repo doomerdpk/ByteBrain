@@ -47,6 +47,7 @@ source "azure-arm" "bytebrain" {
   location = "South India"
   vm_size  = "Standard_D2s_v5"
 
+  build_resource_group_name              = var.resource_group_name  
   virtual_network_name                   = var.vnet_name
   virtual_network_subnet_name            = var.subnet_name
   virtual_network_resource_group_name    = var.resource_group_name
