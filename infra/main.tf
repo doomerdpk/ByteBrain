@@ -148,6 +148,9 @@ module "bytebrain_app_vm" {
   vm_size               = "Standard_D2s_v5"
   admin_username        = var.admin_username
   ssh_public_key        = data.azurerm_key_vault_secret.ssh_public_key.value
+  identity = {
+    type = "SystemAssigned"
+  }
   tags                  = local.bytebrain_tags
 }
 

@@ -90,4 +90,13 @@ resource "azurerm_linux_virtual_machine" "this" {
   boot_diagnostics {
     storage_account_uri = null
   }
+
+  dynamic "identity" {
+    for_each = var.identity == null ? [] : [var.identity]
+
+    content {
+      type         = identity.value.type
+      identity_ids = try(identity.value.identity_ids, null)
+    }
+  }
 }
