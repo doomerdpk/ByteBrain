@@ -43,8 +43,8 @@ source "azure-arm" "bytebrain" {
   image_publisher = "Canonical"
   image_offer     = "0001-com-ubuntu-server-jammy"
   image_sku       = "22_04-lts-gen2"
-  
-  vm_size  = "Standard_D2s_v5"
+
+  vm_size = "Standard_B1s"
 
   build_resource_group_name              = var.resource_group_name  
   virtual_network_name                   = var.vnet_name
