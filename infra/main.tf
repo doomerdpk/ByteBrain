@@ -161,3 +161,24 @@ module "bytebrain_lb" {
   backend_nic_ip_config_name = "internal"
   tags                       = local.bytebrain_tags
 }
+
+resource "azurerm_shared_image_gallery" "bytebrain" {
+  name                = "bytebrain_gallery"
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+  tags                = local.bytebrain_tags
+}
+
+resource "azurerm_shared_image" "bytebrain_app" {
+  name                = "bytebrain-app-image"
+  gallery_name        = azurerm_shared_image_gallery.bytebrain.name
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+  os_type             = "Linux"
+
+  identifier {
+    publisher = "ByteBrain"
+    offer     = "app"
+    sku       = "linux"
+  }
+}
