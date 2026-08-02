@@ -194,12 +194,12 @@ resource "azurerm_shared_image" "bytebrain_app" {
   }
 }
 
-data "azurerm_shared_image_version" "bytebrain_app" {
-  name                = "3.0.0"
-  image_name          = azurerm_shared_image.bytebrain_app.name
-  gallery_name        = azurerm_shared_image_gallery.bytebrain.name
-  resource_group_name = module.bytebrain_rg.name
-}
+# data "azurerm_shared_image_version" "bytebrain_app" {
+#   name                = "3.0.0"
+#   image_name          = azurerm_shared_image.bytebrain_app.name
+#   gallery_name        = azurerm_shared_image_gallery.bytebrain.name
+#   resource_group_name = module.bytebrain_rg.name
+# }
 
 module "bytebrain_vmss" {
   source                 = "./modules/vmss"
