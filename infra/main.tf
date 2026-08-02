@@ -145,21 +145,21 @@ data "azurerm_key_vault_secret" "ssh_public_key" {
 }
 
 
-module "bytebrain_app_vm" {
-  source                = "./modules/app-vm"
-  resource_group_name   = module.bytebrain_rg.name
-  location              = module.bytebrain_rg.location
-  vm_name               = "bytebrain-app-01"
-  subnet_id             = module.bytebrain_subnet.subnet_id
-  bastion_subnet_prefix = "10.0.1.0/26"
-  vm_size               = "Standard_D2s_v5"
-  admin_username        = var.admin_username
-  ssh_public_key        = data.azurerm_key_vault_secret.ssh_public_key.value
-  identity = {
-    type = "SystemAssigned"
-  }
-  tags                  = local.bytebrain_tags
-}
+# module "bytebrain_app_vm" {
+#   source                = "./modules/app-vm"
+#   resource_group_name   = module.bytebrain_rg.name
+#   location              = module.bytebrain_rg.location
+#   vm_name               = "bytebrain-app-01"
+#   subnet_id             = module.bytebrain_subnet.subnet_id
+#   bastion_subnet_prefix = "10.0.1.0/26"
+#   vm_size               = "Standard_D2s_v5"
+#   admin_username        = var.admin_username
+#   ssh_public_key        = data.azurerm_key_vault_secret.ssh_public_key.value
+#   identity = {
+#     type = "SystemAssigned"
+#   }
+#   tags                  = local.bytebrain_tags
+# }
 
 module "bytebrain_lb" {
   source                     = "./modules/load-balancer"
@@ -216,5 +216,8 @@ module "bytebrain_vmss" {
   backend_pool_id           = module.bytebrain_lb.backend_pool_id
   health_probe_id           = module.bytebrain_lb.health_probe_id
   key_vault_name            = module.key_vault.key_vault_name
+  default_instances         = 1
+  min_instances             = 1
+  max_instances             = 2
   tags                      = local.bytebrain_tags
 }

@@ -58,7 +58,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
   sku                 = var.vm_size
-  instances           = var.instance_count
+  instances           = var.default_instances
   admin_username      = var.admin_username
   tags                = var.tags
 
@@ -109,4 +109,62 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
   custom_data = base64encode(templatefile("${path.module}/scripts/startup.sh.tpl", {
   key_vault_name = var.key_vault_name
 }))
+}
+
+resource "azurerm_monitor_autoscale_setting" "this" {
+  name                = "${var.vmss_name}-autoscale"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  target_resource_id  = azurerm_linux_virtual_machine_scale_set.this.id
+  tags                = var.tags
+
+  profile {
+    name = "default"
+
+    capacity {
+      default = var.default_instances
+      minimum = var.min_instances
+      maximum = var.max_instances
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "Percentage CPU"
+        metric_resource_id = azurerm_linux_virtual_machine_scale_set.this.id
+        time_grain         = "PT1M"
+        statistic          = "Average"
+        time_window        = "PT5M"
+        time_aggregation   = "Average"
+        operator           = "GreaterThan"
+        threshold          = var.scale_out_cpu_threshold
+      }
+
+      scale_action {
+        direction = "Increase"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "Percentage CPU"
+        metric_resource_id = azurerm_linux_virtual_machine_scale_set.this.id
+        time_grain         = "PT1M"
+        statistic          = "Average"
+        time_window        = "PT5M"
+        time_aggregation   = "Average"
+        operator           = "LessThan"
+        threshold          = var.scale_in_cpu_threshold
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+  }
 }

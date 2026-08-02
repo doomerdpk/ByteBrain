@@ -55,7 +55,33 @@ variable "key_vault_name" {
   type = string
 }
 
+variable "min_instances" {
+  type    = number
+  default = 1
+}
+
+variable "max_instances" {
+  type    = number
+  default = 2
+}
+
+variable "default_instances" {
+  type    = number
+  default = 1
+}
+
+variable "scale_out_cpu_threshold" {
+  type    = number
+  default = 70
+}
+
+variable "scale_in_cpu_threshold" {
+  type    = number
+  default = 25
+}
+
 variable "tags" {
   type    = map(string)
   default = {}
 }
+
