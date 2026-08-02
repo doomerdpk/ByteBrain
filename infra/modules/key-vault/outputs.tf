@@ -5,3 +5,7 @@ output "key_vault_id" {
 output "key_vault_uri" {
   value = azurerm_key_vault.this.vault_uri
 }
+
+output "key_vault_name" {
+  value = azurerm_key_vault.this.name
+}

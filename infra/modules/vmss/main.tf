@@ -105,4 +105,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
   }
 
   health_probe_id = var.health_probe_id
+
+  custom_data = base64encode(templatefile("${path.module}/scripts/startup.sh.tpl", {
+  key_vault_name = var.key_vault_name
+}))
 }

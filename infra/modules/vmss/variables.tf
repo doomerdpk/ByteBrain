@@ -51,6 +51,10 @@ variable "health_probe_id" {
   description = "LB health probe ID, required for rolling upgrades to track instance health"
 }
 
+variable "key_vault_name" {
+  type = string
+}
+
 variable "tags" {
   type    = map(string)
   default = {}

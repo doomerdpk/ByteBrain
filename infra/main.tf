@@ -188,7 +188,7 @@ resource "azurerm_shared_image" "bytebrain_app" {
 }
 
 data "azurerm_shared_image_version" "bytebrain_app" {
-  name                = "2.0.0"
+  name                = "3.0.0"
   image_name          = azurerm_shared_image.bytebrain_app.name
   gallery_name        = azurerm_shared_image_gallery.bytebrain.name
   resource_group_name = module.bytebrain_rg.name
@@ -208,5 +208,12 @@ module "bytebrain_vmss" {
   bastion_subnet_prefix     = "10.0.1.0/26"
   backend_pool_id           = module.bytebrain_lb.backend_pool_id
   health_probe_id           = module.bytebrain_lb.health_probe_id
+  key_vault_name            = module.key_vault.key_vault_name
   tags                      = local.bytebrain_tags
+}
+
+resource "azurerm_role_assignment" "vmss_keyvault_access" {
+  scope                = module.key_vault.key_vault_id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = module.bytebrain_vmss.vmss_principal_id
 }
