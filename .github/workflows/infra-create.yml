@@ -1,6 +1,7 @@
 name: CI/CD Pipeline to create infra for ByteBrain Application
 
 on:
+  workflow_dispatch:
   push:
     branches: [master]
     paths:
