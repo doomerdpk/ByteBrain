@@ -14,6 +14,9 @@ sudo apt-get install -y nginx
 echo "Installing PM2 globally..."
 sudo npm install -g pm2
 
+echo "Installing Azure CLI..."
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
 echo "Creating app directories..."
 sudo mkdir -p /opt/bytebrain/app /var/log/bytebrain
-sudo chown -R packer:packer /opt/bytebrain /var/log/bytebrain
+sudo chown -R bytebrainadmin:bytebrainadmin /opt/bytebrain /var/log/bytebrain

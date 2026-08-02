@@ -2,9 +2,8 @@ module.exports = {
   apps: [
     {
       name: "bytebrain-backend",
-      cwd: "/opt/bytebrain/current/backend",
+      cwd: "/opt/bytebrain/app/backend",
       script: "dist/index.js",
-    //Tells PM2 to run 2 copies of your Node.js app simultaneously.
       instances: 2,
       exec_mode: "cluster",
       env: {
