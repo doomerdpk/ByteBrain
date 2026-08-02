@@ -37,3 +37,9 @@ variable "db_connection_string" {
   description = "Database connection string for the backend"
   sensitive   = true
 }
+
+variable "jwt_secret" {
+  type        = string
+  description = "JWT signing secret for backend authentication"
+  sensitive   = true
+}
