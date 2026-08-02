@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: "Type the exact resource group name to confirm destroy (e.g. rg-bytebrain-prod-centralindia)"
+        description: "Type the exact resource group name to confirm destroy (e.g. rg-bytebrain-dev-southindia)"
         required: true
         type: string
       reason:
@@ -29,7 +29,8 @@ jobs:
     steps:
       - name: Check resource group name
         run: |
-          if [ "${{ github.event.inputs.confirm }}" != "rg-bytebrain-prod-centralindia" ]; then
+          if [ "${{ github.event.inputs.confirm }}" != "rg-bytebrain-dev-southindia
+          " ]; then
             echo "Resource group name does not match. Aborting destroy."
             exit 1
           fi
