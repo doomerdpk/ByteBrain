@@ -29,8 +29,7 @@ jobs:
     steps:
       - name: Check resource group name
         run: |
-          if [ "${{ github.event.inputs.confirm }}" != "rg-bytebrain-dev-southindia
-          " ]; then
+          if [ "${{ github.event.inputs.confirm }}" != "rg-bytebrain-dev-southindia" ]; then
             echo "Resource group name does not match. Aborting destroy."
             exit 1
           fi
