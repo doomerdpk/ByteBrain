@@ -5,7 +5,7 @@ echo "Fixing ownership for runtime user..."
 chown -R bytebrainadmin:bytebrainadmin /opt/bytebrain/app /var/log/bytebrain
 
 echo "Logging in via Managed Identity..."
-az login --identity
+az login --identity --allow-no-subscriptions
 
 echo "Fetching secrets from Key Vault (with retry for role assignment propagation delay)..."
 
@@ -28,7 +28,7 @@ fetch_secret() {
   return 1
 }
 
-DATABASE_URL=$(fetch_secret "bytebrain-mongo-uri")
+DATABASE_URL=$(fetch_secret "bytebrain-db-connection-string")
 JWT_SECRET=$(fetch_secret "bytebrain-jwt-secret")
 
 cat > /opt/bytebrain/app/backend/.env <<ENVEOF
