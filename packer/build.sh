@@ -8,7 +8,7 @@ IMAGE_VERSION="${1:?Usage: ./build.sh <image_version>}"
 
 SUBSCRIPTION_ID="${SUBSCRIPTION_ID:?Set SUBSCRIPTION_ID env var}"
 RESOURCE_GROUP_NAME="rg-bytebrain-dev-southindia"
-VNET_NAME="vnet-bytebrain-dev-southindia"
+VNET_NAME="vnet-bytebrain-dev-centralindia"
 SUBNET_NAME="bytebrain-app"
 GALLERY_NAME="bytebrain_gallery"
 GALLERY_IMAGE_NAME="bytebrain-app-image"
