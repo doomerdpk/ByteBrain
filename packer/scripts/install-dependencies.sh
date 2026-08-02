@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "Updating package lists..."
-sudo apt-get update
+sudo apt-get update -o APT::Update::Post-Invoke-Success::=""
 
 echo "Installing Node.js LTS..."
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
