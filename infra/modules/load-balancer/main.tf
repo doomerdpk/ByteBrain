@@ -25,11 +25,11 @@ resource "azurerm_lb_backend_address_pool" "this" {
   loadbalancer_id = azurerm_lb.this.id
 }
 
-resource "azurerm_network_interface_backend_address_pool_association" "this" {
-  network_interface_id   = var.backend_nic_id
-  ip_configuration_name  = var.backend_nic_ip_config_name
-  backend_address_pool_id = azurerm_lb_backend_address_pool.this.id
-}
+# resource "azurerm_network_interface_backend_address_pool_association" "this" {
+#   network_interface_id   = var.backend_nic_id
+#   ip_configuration_name  = var.backend_nic_ip_config_name
+#   backend_address_pool_id = azurerm_lb_backend_address_pool.this.id
+# }
 
 resource "azurerm_lb_probe" "http" {
   name                = "http-health-probe"

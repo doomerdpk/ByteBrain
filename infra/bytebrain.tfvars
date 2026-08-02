@@ -5,5 +5,5 @@ location            = "South India"
 # Azure Container Registry (ACR) configuration
 acr_name = "acrbytebraindev01"
 
-# Bytebrain VM Configuration
+# Bytebrain VM/VMSS Configuration
 admin_username = "bytebrainadmin"
