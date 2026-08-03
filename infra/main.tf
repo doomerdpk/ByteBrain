@@ -57,19 +57,19 @@ module "bytebrain_frontend" {
   tags = local.bytebrain_tags
 }
 
-module "bytebrain_vnet" {
-  source = "./modules/vnet"
+# module "bytebrain_vnet" {
+#   source = "./modules/vnet"
 
-  name                = "vnet-bytebrain-dev-centralindia"
-  resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
+#   name                = "vnet-bytebrain-dev-centralindia"
+#   resource_group_name = module.bytebrain_rg.name
+#   location            = module.bytebrain_rg.location
 
-  address_space = [
-    "10.0.0.0/16"
-  ]
+#   address_space = [
+#     "10.0.0.0/16"
+#   ]
 
-  tags = local.bytebrain_tags
-}
+#   tags = local.bytebrain_tags
+# }
 
 # module "azure_bastion" {
 #   source = "./modules/azure-bastion"
@@ -90,24 +90,24 @@ module "bytebrain_vnet" {
 #   allowed_source_address_prefixes = ["103.175.135.241/32"]
 # }
 
-module "bytebrain_subnet" {
-  source              = "./modules/subnet"
-  resource_group_name = module.bytebrain_rg.name
-  vnet_name           = module.bytebrain_vnet.name
-  subnet_name         = "bytebrain-app"
-  address_prefixes    = ["10.0.1.64/26"]
-  tags                = local.bytebrain_tags
-}
+# module "bytebrain_subnet" {
+#   source              = "./modules/subnet"
+#   resource_group_name = module.bytebrain_rg.name
+#   vnet_name           = module.bytebrain_vnet.name
+#   subnet_name         = "bytebrain-app"
+#   address_prefixes    = ["10.0.1.64/26"]
+#   tags                = local.bytebrain_tags
+# }
 
-module "nat_gateway" {
-  source              = "./modules/nat-gateway"
-  resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
-  nat_gateway_name    = "natgw-bytebrain"
-  public_ip_name      = "pip-natgw-bytebrain"
-  subnet_id           = module.bytebrain_subnet.subnet_id
-  tags                = local.bytebrain_tags
-}
+# module "nat_gateway" {
+#   source              = "./modules/nat-gateway"
+#   resource_group_name = module.bytebrain_rg.name
+#   location            = module.bytebrain_rg.location
+#   nat_gateway_name    = "natgw-bytebrain"
+#   public_ip_name      = "pip-natgw-bytebrain"
+#   subnet_id           = module.bytebrain_subnet.subnet_id
+#   tags                = local.bytebrain_tags
+# }
 
 module "key_vault" {
   source              = "./modules/key-vault"
@@ -240,7 +240,7 @@ module "app_service_plan" {
   name                = "asp-bytebrain-dev"
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
-  sku_name = "S1"
+  sku_name = "B1"
 
   tags = local.bytebrain_tags
 }
@@ -252,7 +252,6 @@ module "linux_web_app" {
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
   app_service_plan_id = module.app_service_plan.id
-  virtual_network_subnet_id = module.bytebrain_subnet.subnet_id
 
   container_image = "${module.bytebrain_acr.login_server}/backend:latest"
 
