@@ -13,15 +13,15 @@ module "bytebrain_rg" {
   tags     = local.bytebrain_tags
 }
 
-# module "bytebrain_acr" {
-#   source = "./modules/acr"
+module "bytebrain_acr" {
+  source = "./modules/acr"
 
-#   name                = var.acr_name
-#   resource_group_name = module.bytebrain_rg.name
-#   location            = var.location
-#   sku                 = "Standard"
-#   tags                = local.bytebrain_tags
-# }
+  name                = var.acr_name
+  resource_group_name = module.bytebrain_rg.name
+  location            = var.location
+  sku                 = "Standard"
+  tags                = local.bytebrain_tags
+}
 
 # module "bytebrain_frontend" {
 #   source = "./modules/storage-static-site"
@@ -109,13 +109,13 @@ module "bytebrain_rg" {
 #   tags                = local.bytebrain_tags
 # }
 
-# module "key_vault" {
-#   source              = "./modules/key-vault"
-#   resource_group_name = module.bytebrain_rg.name
-#   location            = module.bytebrain_rg.location
-#   key_vault_name      = "kvdpkdev01"
-#   tags                = local.bytebrain_tags
-# }
+module "key_vault" {
+  source              = "./modules/key-vault"
+  resource_group_name = module.bytebrain_rg.name
+  location            = module.bytebrain_rg.location
+  key_vault_name      = "kvdpkdev01"
+  tags                = local.bytebrain_tags
+}
 
 # module "bytebrain_ssh_key_secret" {
 #   source       = "./modules/key-vault-secret"
@@ -124,19 +124,19 @@ module "bytebrain_rg" {
 #   secret_value = var.ssh_public_key
 # }
 
-# module "bytebrain_db_connection_string" {
-#   source       = "./modules/key-vault-secret"
-#   key_vault_id = module.key_vault.key_vault_id
-#   secret_name  = "bytebrain-db-connection-string"
-#   secret_value = var.db_connection_string
-# }
+module "bytebrain_db_connection_string" {
+  source       = "./modules/key-vault-secret"
+  key_vault_id = module.key_vault.key_vault_id
+  secret_name  = "bytebrain-db-connection-string"
+  secret_value = var.db_connection_string
+}
 
-# module "bytebrain_jwt_secret" {
-#   source       = "./modules/key-vault-secret"
-#   key_vault_id = module.key_vault.key_vault_id
-#   secret_name  = "bytebrain-jwt-secret"
-#   secret_value = var.jwt_secret
-# }
+module "bytebrain_jwt_secret" {
+  source       = "./modules/key-vault-secret"
+  key_vault_id = module.key_vault.key_vault_id
+  secret_name  = "bytebrain-jwt-secret"
+  secret_value = var.jwt_secret
+}
 
 # data "azurerm_key_vault_secret" "ssh_public_key" {
 #   name         = "bytebrain-ssh-public-key"
