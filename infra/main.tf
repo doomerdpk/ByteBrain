@@ -5,13 +5,13 @@ locals {
   }
 }
 
-# module "bytebrain_rg" {
-#   source = "./modules/resource-group"
+module "bytebrain_rg" {
+  source = "./modules/resource-group"
 
-#   name     = var.resource_group_name
-#   location = var.location
-#   tags     = local.bytebrain_tags
-# }
+  name     = var.resource_group_name
+  location = var.location
+  tags     = local.bytebrain_tags
+}
 
 # module "bytebrain_acr" {
 #   source = "./modules/acr"

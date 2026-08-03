@@ -15,31 +15,31 @@ variable "location" {
   default     = "Central India"
 }
 
-variable "acr_name" {
-  description = "Globally unique ACR name (letters/numbers only, no hyphens, 5-50 chars)"
-  type        = string
-  default     = "acrbytebraindev01"
-}
+# variable "acr_name" {
+#   description = "Globally unique ACR name (letters/numbers only, no hyphens, 5-50 chars)"
+#   type        = string
+#   default     = "acrbytebraindev01"
+# }
 
-variable "ssh_public_key" {
-  type        = string
-  description = "SSH public key for VM admin access"
-  sensitive   = true
-}
+# variable "ssh_public_key" {
+#   type        = string
+#   description = "SSH public key for VM admin access"
+#   sensitive   = true
+# }
 
-variable "admin_username" {
-  type        = string
-  description = "Admin username for VM SSH access"
-}
+# variable "admin_username" {
+#   type        = string
+#   description = "Admin username for VM SSH access"
+# }
 
-variable "db_connection_string" {
-  type        = string
-  description = "Database connection string for the backend"
-  sensitive   = true
-}
+# variable "db_connection_string" {
+#   type        = string
+#   description = "Database connection string for the backend"
+#   sensitive   = true
+# }
 
-variable "jwt_secret" {
-  type        = string
-  description = "JWT signing secret for backend authentication"
-  sensitive   = true
-}
+# variable "jwt_secret" {
+#   type        = string
+#   description = "JWT signing secret for backend authentication"
+#   sensitive   = true
+# }
