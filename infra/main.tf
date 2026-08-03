@@ -240,7 +240,7 @@ module "app_service_plan" {
   name                = "asp-bytebrain-dev"
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
-  sku_name = "B1"
+  sku_name = "F1"
 
   tags = local.bytebrain_tags
 }
