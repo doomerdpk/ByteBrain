@@ -240,9 +240,9 @@ module "app_service_plan" {
   name                = "asp-bytebrain-dev"
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
-  sku_tier            = "Basic"
-  sku_size            = "B1"
-  tags                = local.bytebrain_tags
+  sku_name = "S1"
+
+  tags = local.bytebrain_tags
 }
 
 module "linux_web_app" {

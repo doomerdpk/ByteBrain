@@ -13,16 +13,10 @@ variable "location" {
   type        = string
 }
 
-variable "sku_tier" {
+variable "sku_name" {
   description = "SKU tier for App Service plan"
   type        = string
   default     = "Basic"
-}
-
-variable "sku_size" {
-  description = "SKU size for App Service plan"
-  type        = string
-  default     = "B1"
 }
 
 variable "tags" {
