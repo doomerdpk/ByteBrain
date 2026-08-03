@@ -222,50 +222,50 @@ module "bytebrain_jwt_secret" {
 #   tags                      = local.bytebrain_tags
 # }
 
-data "azurerm_key_vault_secret" "db_connection_string" {
-  name         = "bytebrain-db-connection-string"
-  key_vault_id = module.key_vault.key_vault_id
-  depends_on   = [module.bytebrain_db_connection_string]
-}
+# data "azurerm_key_vault_secret" "db_connection_string" {
+#   name         = "bytebrain-db-connection-string"
+#   key_vault_id = module.key_vault.key_vault_id
+#   depends_on   = [module.bytebrain_db_connection_string]
+# }
 
-data "azurerm_key_vault_secret" "jwt_secret" {
-  name         = "bytebrain-jwt-secret"
-  key_vault_id = module.key_vault.key_vault_id
-  depends_on   = [module.bytebrain_jwt_secret]
-}
+# data "azurerm_key_vault_secret" "jwt_secret" {
+#   name         = "bytebrain-jwt-secret"
+#   key_vault_id = module.key_vault.key_vault_id
+#   depends_on   = [module.bytebrain_jwt_secret]
+# }
 
-module "app_service_plan" {
-  source = "./modules/app-service-plan"
+# module "app_service_plan" {
+#   source = "./modules/app-service-plan"
 
-  name                = "asp-bytebrain-dev"
-  resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
-  sku_name = "F1"
+#   name                = "asp-bytebrain-dev"
+#   resource_group_name = module.bytebrain_rg.name
+#   location            = module.bytebrain_rg.location
+#   sku_name = "F1"
 
-  tags = local.bytebrain_tags
-}
+#   tags = local.bytebrain_tags
+# }
 
-module "linux_web_app" {
-  source = "./modules/linux-web-app"
+# module "linux_web_app" {
+#   source = "./modules/linux-web-app"
 
-  name                = "app-bytebrain-backend"
-  resource_group_name = module.bytebrain_rg.name
-  location            = module.bytebrain_rg.location
-  app_service_plan_id = module.app_service_plan.id
+#   name                = "app-bytebrain-backend"
+#   resource_group_name = module.bytebrain_rg.name
+#   location            = module.bytebrain_rg.location
+#   app_service_plan_id = module.app_service_plan.id
 
-  container_image = "${module.bytebrain_acr.login_server}/backend:latest"
+#   container_image = "${module.bytebrain_acr.login_server}/backend:latest"
 
-  app_settings = {
-    "DATABASE_URL" = data.azurerm_key_vault_secret.db_connection_string.value
-    "JWT_SECRET"   = data.azurerm_key_vault_secret.jwt_secret.value
-    "NODE_ENV"     = "production"
-  }
+#   app_settings = {
+#     "DATABASE_URL" = data.azurerm_key_vault_secret.db_connection_string.value
+#     "JWT_SECRET"   = data.azurerm_key_vault_secret.jwt_secret.value
+#     "NODE_ENV"     = "production"
+#   }
 
-  tags = local.bytebrain_tags
-}
+#   tags = local.bytebrain_tags
+# }
 
-resource "azurerm_role_assignment" "web_app_acr_pull" {
-  scope              = module.bytebrain_acr.id
-  role_definition_name = "AcrPull"
-  principal_id       = module.linux_web_app.identity_principal_id
-}
+# resource "azurerm_role_assignment" "web_app_acr_pull" {
+#   scope              = module.bytebrain_acr.id
+#   role_definition_name = "AcrPull"
+#   principal_id       = module.linux_web_app.identity_principal_id
+# }
