@@ -13,15 +13,15 @@ module "bytebrain_rg" {
   tags     = local.bytebrain_tags
 }
 
-module "bytebrain_acr" {
-  source = "./modules/acr"
+# module "bytebrain_acr" {
+#   source = "./modules/acr"
 
-  name                = var.acr_name
-  resource_group_name = module.bytebrain_rg.name
-  location            = var.location
-  sku                 = "Standard"
-  tags                = local.bytebrain_tags
-}
+#   name                = var.acr_name
+#   resource_group_name = module.bytebrain_rg.name
+#   location            = var.location
+#   sku                 = "Standard"
+#   tags                = local.bytebrain_tags
+# }
 
 # module "bytebrain_frontend" {
 #   source = "./modules/storage-static-site"
@@ -45,17 +45,17 @@ module "bytebrain_acr" {
 #   tags = local.bytebrain_tags
 # }
 
-module "bytebrain_frontend" {
+# module "bytebrain_frontend" {
 
-  source = "./modules/static-web-apps"
+#   source = "./modules/static-web-apps"
 
-  name                = "bytebrain-dev-fe"
-  resource_group_name = module.bytebrain_rg.name
-  # Static-web-apps are not available in all regions, so we will use East Asia for now.
-  location = "East Asia"
+#   name                = "bytebrain-dev-fe"
+#   resource_group_name = module.bytebrain_rg.name
+#   # Static-web-apps are not available in all regions, so we will use East Asia for now.
+#   location = "East Asia"
 
-  tags = local.bytebrain_tags
-}
+#   tags = local.bytebrain_tags
+# }
 
 # module "bytebrain_vnet" {
 #   source = "./modules/vnet"
