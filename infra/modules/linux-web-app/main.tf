@@ -13,9 +13,11 @@ resource "azurerm_linux_web_app" "this" {
   client_affinity_enabled = false
 
   site_config {
-    linux_fx_version = "DOCKER|${var.container_image}"
+  application_stack {
+        docker_image_name = var.container_image
+    }
+    container_registry_use_managed_identity = true
   }
-
   app_settings = var.app_settings
   tags         = var.tags
 }

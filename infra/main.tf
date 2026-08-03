@@ -252,7 +252,7 @@ module "linux_web_app" {
   resource_group_name = module.bytebrain_rg.name
   location            = module.bytebrain_rg.location
   app_service_plan_id = module.app_service_plan.id
-  virtual_network_subnet_id = module.bytebrain_vnet.id
+  virtual_network_subnet_id = module.bytebrain_subnet.subnet_id
 
   container_image = "${module.bytebrain_acr.login_server}/backend:latest"
 
