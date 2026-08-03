@@ -3,7 +3,7 @@ output "id" {
 }
 
 output "default_hostname" {
-  value = azurerm_linux_web_app.this.default_site_hostname
+  value = azurerm_linux_web_app.this.default_hostname
 }
 
 output "identity_principal_id" {

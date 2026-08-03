@@ -1,7 +1,7 @@
 output "id" {
-  value = azurerm_app_service_plan.this.id
+  value = azurerm_service_plan.this.id
 }
 
 output "name" {
-  value = azurerm_app_service_plan.this.name
+  value = azurerm_service_plan.this.name
 }
