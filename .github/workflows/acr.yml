@@ -1,11 +1,11 @@
 name: Build and Push Docker Images to ACR
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "backend/**"
-      - "frontend/**"
+  # push:
+  #   branches: [master]
+  #   paths:
+  #     - "backend/**"
+  #     - "frontend/**"
   workflow_dispatch:
 
 permissions:

@@ -1,12 +1,13 @@
 name: CI/CD to deploy bytebrain frontend to Azure Static Web Apps
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "frontend/**"
-      - ".github/workflows/deploy-frontend.yml"
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - "frontend/**"
+  #     - ".github/workflows/deploy-frontend.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read

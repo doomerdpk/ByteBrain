@@ -1,11 +1,11 @@
 name: Deploy ByteBrain App
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "frontend/**"
-      - "backend/**"
+  # push:
+  #   branches: [master]
+  #   paths:
+  #     - "frontend/**"
+  #     - "backend/**"
   workflow_dispatch:
 
 permissions:
