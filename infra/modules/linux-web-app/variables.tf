@@ -29,6 +29,11 @@ variable "app_settings" {
   default     = {}
 }
 
+variable "virtual_network_subnet_id" {
+    description = "VNET in which appllication will be deployed"
+    type = string
+}
+
 variable "tags" {
   description = "Tags to apply to the Web App"
   type        = map(string)
